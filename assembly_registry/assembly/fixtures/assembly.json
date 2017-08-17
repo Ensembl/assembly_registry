@@ -1,0 +1,123 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "test1234",
+        "last_login": "2017-08-04T10:43:45.595Z",
+        "is_superuser": true,
+        "username": "test1",
+        "first_name": "TestFirst",
+        "last_name": "TestLast",
+        "email": "test1@test.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2017-08-03T13:00:30.773Z",
+        "groups": [],
+        "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "test1234",
+        "last_login": "2017-08-07T09:57:23.213Z",
+        "is_superuser": false,
+        "username": "test2",
+        "first_name": "Test2",
+        "last_name": "Test2",
+         "email": "test2@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-08-03T13:01:53Z",
+        "groups": [],
+        "user_permissions": []
+    }
+  },
+  
+  {
+    "model": "assembly.assembly",
+    "pk": 1,
+    "fields": {
+      "project_name": "VGP",
+      "taxon_id": "8152",
+      "centre": "WTSI",
+      "scientific_name": "Astatotilapia calliptera",
+      "status": "genome sequenced",
+      "assembly_version": "1",
+      "data_release": "public",
+      "created_by_id": "2",
+      "gender": "female",
+      "created_date": "2017-08-03T13:01:53Z",
+      "modified_date": "2017-08-03T13:01:53Z"
+     }
+  },
+  {
+    "model": "assembly.assembly",
+    "pk": 2,
+    "fields": {
+      "project_name": "VGP",
+      "taxon_id": "8152",
+      "centre": "WTSI",
+      "scientific_name": "Astatotilapia calliptera",
+      "status": "genome sequenced",
+      "data_release": "private",
+      "created_by_id": "2",
+      "gender": "female",
+      "created_date": "2017-08-03T13:01:53Z",
+      "modified_date": "2017-08-03T13:01:53Z"
+     }
+  },
+  {
+    "model": "assembly.assembly",
+    "pk": 3,
+    "fields": {
+      "project_name": "VGP",
+      "taxon_id": "8152",
+      "centre": "WTSI",
+      "scientific_name": "Astatotilapia calliptera",
+      "status": "genome sequenced",
+      "data_release": "private",
+      "created_by_id": "2",
+      "gender": "female",
+      "created_date": "2017-08-03T13:01:53Z",
+      "modified_date": "2017-08-03T13:01:53Z"
+     }
+  },
+  {
+    "model": "assembly.assembly",
+    "pk": 4,
+    "fields": {
+      "project_name": "VGP",
+      "taxon_id": "8152",
+      "centre": "WTSI",
+      "scientific_name": "Astatotilapia calliptera",
+      "status": "genome sequenced",
+      "data_release": "private",
+      "created_by_id": "2",
+      "gender": "female",
+      "assembly_version": "4",
+      "created_date": "2017-08-03T13:01:53Z",
+      "modified_date": "2017-08-03T13:01:53Z"
+     }
+  },
+ 
+  {
+    "model": "assembly.assembly",
+    "pk": 5,
+    "fields": {
+      "project_name": "TTT",
+      "taxon_id": "9606",
+      "centre": "DUMMY",
+      "status": "submitted",
+      "data_release": "private",
+      "created_by_id": "2",
+      "gender": "male",
+      "scientific_name": "Homo sapiens",
+      "created_date": "2017-08-03T13:01:53Z",
+      "modified_date": "2017-08-03T13:01:53Z"
+     }
+  }
+  
+]

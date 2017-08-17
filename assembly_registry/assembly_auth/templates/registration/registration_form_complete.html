@@ -1,0 +1,27 @@
+{% extends "rest_framework_swagger/swagger_base.html" %}
+
+{% block title %}You are Registered{% endblock %}
+{% block content %}
+
+
+<div class="container">
+
+
+<div class="row" style="padding-top:10px;padding-bottom:20px;">
+			<div class="col-md-9">
+{% if success_registration == True %}
+<div class="well">
+Welcome {{ user.username }}. Registration was successful. Thank you for Registering. Please <a href="/">continue</a> to use the application.
+</div>
+{% else %}
+Sorry. Registration failed. Please try again.
+{% endif %}
+
+
+</div>
+</div>
+
+</div>
+
+
+{% endblock %}

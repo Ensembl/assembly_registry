@@ -1,0 +1,49 @@
+{% extends "rest_framework_swagger/swagger_base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+{% load staticfiles %}
+{% load add_css %}
+
+<div class="container">
+
+<div class="row" style="padding-top:10px;padding-bottom:20px;">
+ <div class="col-md-8 col-md-offset-2">
+		
+
+ <div class="panel panel-info">
+          <div class="panel-heading">
+             <div class="panel-title">Sign Up</div>
+          </div>
+          
+         <div style="padding-top:30px" class="panel-body" >
+
+<form action="/accounts/register/" method="post" class="form-horizontal">{% csrf_token %}
+{% for field in form.visible_fields %}
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="id_{field.html_name}}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+            <div class="col-sm-4">
+               {{field|addcss:"form-control"}}
+                {% if field.errors %}<span class="help-inline" style="color:red">{{ field.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+ {% endfor %}
+  
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <button type="submit" class="btn btn-default">Sign Up</button>
+    </div>
+  </div>
+
+</form>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+{% endblock %}

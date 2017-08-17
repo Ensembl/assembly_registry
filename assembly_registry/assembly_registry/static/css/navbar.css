@@ -1,0 +1,13 @@
+.swagger-section #header {
+   background-color: #002663;
+   height: 50px;
+   padding: 14px 14px 14px 14px;
+   }
+
+.swagger-section a.header__btn  {
+   background-color: #286090;
+   }
+
+.swagger-section a.header__btn:hover  {
+   background-color: #66bfff;
+   }

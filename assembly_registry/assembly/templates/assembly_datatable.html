@@ -1,0 +1,74 @@
+{% extends "rest_framework_swagger/swagger_base.html" %}
+
+{% block title %}Assembly Registry List{% endblock %}
+
+{% load staticfiles %}
+
+{% block extra_styles %}
+    <!--Load the AJAX API-->
+    <!--script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script-->
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+
+$(document).ready(function() {
+   $('#assembly_table').dataTable( {
+        ajax: {
+         url: "/assembly/listall",
+         dataSrc: ''
+        },
+       columns: [
+            { "data": "assembly_id"},
+            { "data": "project_name"},
+            { "data": "gen_spe_num"},
+            { "data": "gender"},
+            { "data": "scientific_name"},
+            { "data": "assembly_version"},
+            { "data": "taxon_id"},
+            { "data": "centre"},
+            { "data": "status"},
+            { "data": "data_release"},
+            { "data": "created_date"},
+            { "data": "modified_date"},
+            { "data": "username"},
+        ]
+   });
+});
+
+
+  
+</script>
+
+{% endblock %}
+
+{% block content %}
+   <div class="container">
+   <div class="row">
+    <table id="assembly_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>AssemblyID</th>
+                <th>ProjectName</th>
+                <th>GeneSpeNum</th>
+                <th>Gender</th>
+                <th>ScientificName</th>
+                <th>AssemblyVersion</th>
+                <th>TaxonomyID</th>
+                <th>Centre</th>
+                <th>Status</th>
+                <th>DataRelease</th>
+                <th>CreatedDate</th>
+                <th>ModifiedDate</th>
+                <th>CreatedBy</th>
+            </tr>
+        </thead>
+    </table>
+    </div>
+  </div>
+{% endblock %}
+
+
+<body></body>
+
+
