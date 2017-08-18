@@ -64,7 +64,7 @@ class AssemblyList(generics.ListCreateAPIView):
         permission_classes = (IsAuthenticated,)  # @UnusedVariable
 
         # custom validation
-        if "gender" in request.data.keys() and request.data["gender"] is not None:
+        if "gender" in request.data.keys() and request.data["gender"] is not None and len(request.data["gender"]) > 0:
             gender_ = request.data["gender"]
             if gender_ not in ["male", "female"]:
                 raise exceptions.ValidationError(detail="Not a valid gender value." +
