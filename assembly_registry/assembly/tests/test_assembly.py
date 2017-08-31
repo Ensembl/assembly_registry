@@ -47,16 +47,16 @@ class AssemblyTest(APITestCase):
         json_response = (json.loads(response.content.decode('utf8')))
         self.assertEqual(json_response['count'], 5)
         expected_assembly = {'scientific_name': 'Astatotilapia calliptera', 'data_release': 'public',
-                             'gender': 'female', 'centre': 'WTSI', 'status': 'genome sequenced',
+                             'genus': 'xxxx', 'centre': 'WTSI', 'status': 'genome sequenced',
                              'modified_date': '2017-08-03T13:01:53Z',
                              'created_date': '2017-08-03T13:01:53Z',
-                             'taxon_id': 8152, 'gen_spe_num': 'fAstCal1',
+                             'taxon_id': 8152, 'encoded_name': 'xAstCal1',
                              'project_name': 'VGP', 'assembly_id': 1,
-                             'assembly_version': 1, 'username': 'test2'}
+                             'version': 1, 'username': 'test2'}
 
         self.assertEqual(json_response['results'][0], expected_assembly)
         # Test filter by gen_spe_num
-        response = self.client.get('/assembly/gen_spe_num/fAstCal1/')
+        response = self.client.get('/assembly/encoded_name/xAstCal1/')
         self.assertEqual(response.status_code, 200)
         json_response = (json.loads(response.content.decode('utf8')))
         self.assertEqual(json_response, expected_assembly)
@@ -64,7 +64,7 @@ class AssemblyTest(APITestCase):
         # POST
         url = reverse('assembly_list')
         data = {'scientific_name': 'Astatotilapia calliptera', 'data_release': 'public',
-                'gender': 'female', 'centre': 'WTSI', 'status': 'genome sequenced',
+                'genus': 'xxxx', 'centre': 'WTSI', 'status': 'genome sequenced',
                 'project_name': 'VGP',
                 }
         response = self.client.post(url, data, format='json')
@@ -79,18 +79,18 @@ class AssemblyTest(APITestCase):
         self.assertEqual(response.status_code, 201)  # Created
 
         # PUT (UPDATE)
-        url = "/assembly/gen_spe_num/fAstCal1/"
+        url = "/assembly/encoded_name/xAstCal1/"
         data = {'scientific_name': 'Astatotilapia calliptera'
                 }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, 400)  # Bad request.Not allowed to update scientific_name
 
-        data = {'gender': 'male'
+        data = {'genus': 'yyyy'
                 }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, 400)  # Bad request.Not allowed to update gender
 
-        data = {'assembly_version': '2'
+        data = {'version': '2'
                 }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, 400)  # Bad request. Not allowed to update gender assembly_version
@@ -100,26 +100,26 @@ class AssemblyTest(APITestCase):
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, 200)  # OK
 
-        assembly = Assembly.objects.get(gen_spe_num="fAstCal1")
+        assembly = Assembly.objects.get(encoded_name="xAstCal1")
         self.assertEqual("updated_project_name", assembly.project_name, "Updated successfully")
 
         # DELETE
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, 204)  # No content
 
-    def test_derive_gen_spe_num(self):
+    def test_encoded_name(self):
 
-        assembly_fAstCal1 = Assembly.objects.get(gen_spe_num="fAstCal1")
-        self.assertEqual("female", assembly_fAstCal1.gender, "Got the right gender")
+        assembly_fAstCal1 = Assembly.objects.get(encoded_name="xAstCal1")
+        self.assertEqual("xxxx", assembly_fAstCal1.genus, "Got the right genus")
         self.assertEqual("Astatotilapia calliptera", assembly_fAstCal1.scientific_name, "Got the right scientific_name")
-        self.assertEqual(1, assembly_fAstCal1.assembly_version, "Got the right assembly version")
+        self.assertEqual(1, assembly_fAstCal1.version, "Got the right assembly version")
 
-        assembly_fAstCal1 = Assembly.objects.get(gen_spe_num="fAstCal3")
-        self.assertEqual("female", assembly_fAstCal1.gender, "Got the right gender")
+        assembly_fAstCal1 = Assembly.objects.get(encoded_name="xAstCal3")
+        self.assertEqual("xxxx", assembly_fAstCal1.genus, "Got the right genus")
         self.assertEqual("Astatotilapia calliptera", assembly_fAstCal1.scientific_name, "Got the right scientific_name")
-        self.assertEqual(3, assembly_fAstCal1.assembly_version, "Got the right assembly version")
+        self.assertEqual(3, assembly_fAstCal1.version, "Got the right version")
 
-        assembly_fAstCal1 = Assembly.objects.get(gen_spe_num="mHomSap1")
-        self.assertEqual("male", assembly_fAstCal1.gender, "Got the right gender")
+        assembly_fAstCal1 = Assembly.objects.get(encoded_name="xHomSap1")
+        self.assertEqual("xxxx", assembly_fAstCal1.genus, "Got the right genus")
         self.assertEqual("Homo sapiens", assembly_fAstCal1.scientific_name, "Got the right scientific_name")
-        self.assertEqual(1, assembly_fAstCal1.assembly_version, "Got the right assembly version")
+        self.assertEqual(1, assembly_fAstCal1.version, "Got the right assembly version")

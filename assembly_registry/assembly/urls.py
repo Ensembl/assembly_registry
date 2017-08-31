@@ -21,7 +21,7 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     url(r'^$', views.AssemblyList.as_view(), name='assembly_list'),
-    url(r'^gen_spe_num/(?P<gen_spe_num>[a-zA-Z0-9]+)/$', views.AssemblyDetail.as_view(), name='assembly_detail'),
+    url(r'^encoded_name/(?P<encoded_name>[a-zA-Z0-9]+)/$', views.AssemblyDetail.as_view(), name='assembly_detail'),
     url(r'^datatable/list', TemplateView.as_view(template_name="assembly_datatable.html"), name="assembly_datatable"),
     url(r'^help/$', TemplateView.as_view(template_name="assembly_help.html"),
         {"hostname": "http://prem-ml:9000"}, name="assembly_help"),

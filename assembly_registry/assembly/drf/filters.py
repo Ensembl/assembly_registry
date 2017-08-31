@@ -27,19 +27,19 @@ project_name_field = coreapi.Field(
             type='string',
             description='project_name to filter(eg: VGP)')
 
-gen_spe_num_field = coreapi.Field(
-            name='gen_spe_num',
+encoded_name = coreapi.Field(
+            name='encoded_name',
             location='query',
             required=False,
             type='string',
-            description='gen_spe_num to filter(eg: fAstCal2)')
+            description='encoded_name to filter(eg: fAstCal2)')
 
-gender_field = coreapi.Field(
-            name='gender',
+genus_field = coreapi.Field(
+            name='genus',
             location='query',
             required=False,
             type='string',
-            description='gender to filter(eg: male, female)')
+            description='genus to filter')
 
 scientific_name_field = coreapi.Field(
             name='scientific_name',
@@ -48,7 +48,7 @@ scientific_name_field = coreapi.Field(
             type='string',
             description='scientific_name to filter(eg: Homo sapiens)')
 
-assembly_version_field = coreapi.Field(
+version_field = coreapi.Field(
             name='assembly_version',
             location='query',
             required=False,
@@ -92,9 +92,9 @@ class AssemblyFilterBackend(BaseFilterBackend):
         if project_name is not None:
             queryset = queryset.filter(project_name__icontains=project_name)
 
-        gen_spe_num = request.query_params.get('gen_spe_num', None)
-        if gen_spe_num is not None:
-            queryset = queryset.filter(gen_spe_num__icontains=gen_spe_num)
+        encoded_name = request.query_params.get('encoded_name', None)
+        if encoded_name is not None:
+            queryset = queryset.filter(encoded_name__icontains=encoded_name)
 
         taxonomy_ids = request.query_params.get('taxonomy_ids', None)
         if taxonomy_ids is not None:
@@ -105,13 +105,13 @@ class AssemblyFilterBackend(BaseFilterBackend):
         if centre is not None:
             queryset = queryset.filter(centre__icontains=centre)
 
-        gender = request.query_params.get('gender', None)
-        if gender is not None:
-            queryset = queryset.filter(gender=gender)
+        genus = request.query_params.get('genus', None)
+        if genus is not None:
+            queryset = queryset.filter(genus=genus)
 
-        assembly_version = request.query_params.get('assembly_version', None)
-        if assembly_version is not None:
-            queryset = queryset.filter(assembly_version=assembly_version)
+        version = request.query_params.get('version', None)
+        if version is not None:
+            queryset = queryset.filter(version=version)
 
         scientific_name = request.query_params.get('scientific_name', None)
         if scientific_name is not None:
@@ -128,5 +128,5 @@ class AssemblyFilterBackend(BaseFilterBackend):
         return queryset
 
     def get_schema_fields(self, view):
-        return [project_name_field, gen_spe_num_field, gender_field, scientific_name_field, assembly_version_field,
+        return [project_name_field, encoded_name, genus_field, scientific_name_field, version_field,
                 taxonomy_ids_field, centre_field, status_field, data_release_field]

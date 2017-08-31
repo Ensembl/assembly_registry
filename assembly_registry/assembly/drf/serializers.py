@@ -38,6 +38,6 @@ class AssemblySerializer(SerializerMixin, serializers.ModelSerializer):
     class Meta:
         model = Assembly
         # fields = '__all__'
-        fields = ('assembly_id', 'project_name', 'gen_spe_num', 'taxon_id', 'centre', 'status',
-                  'data_release', 'assembly_version', 'gender', 'scientific_name', 'created_date',
+        fields = ('assembly_id', 'project_name', 'encoded_name', 'taxon_id', 'centre', 'status',
+                  'data_release', 'version', 'genus', 'scientific_name', 'created_date',
                   'modified_date', 'username')

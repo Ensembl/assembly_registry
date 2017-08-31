@@ -40,9 +40,6 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
 
-# class AssemblyList(mixins.ListModelMixin,
-#                    mixins.CreateModelMixin,
-#                    generics.GenericAPIView):
 class AssemblyList(generics.ListCreateAPIView):
     """
     get:
@@ -64,11 +61,11 @@ class AssemblyList(generics.ListCreateAPIView):
         permission_classes = (IsAuthenticated,)  # @UnusedVariable
 
         # custom validation
-        if "gender" in request.data.keys() and request.data["gender"] is not None and len(request.data["gender"]) > 0:
-            gender_ = request.data["gender"]
-            if gender_ not in ["male", "female"]:
-                raise exceptions.ValidationError(detail="Not a valid gender value." +
-                                                 " Gender should be either male or female")
+#         if "genus" in request.data.keys() and request.data["genus"] is not None and len(request.data["genus"]) > 0:
+#             gender_ = request.data["genus"]
+#             if gender_ not in ["male", "female"]:
+#                 raise exceptions.ValidationError(detail="Not a valid gender value." +
+#                                                  " Gender should be either male or female")
 
         if serializer.is_valid():
             serializer.save(created_by=self.request.user)
@@ -101,27 +98,27 @@ class AssemblyDetail(mixins.RetrieveModelMixin,
     filter_backends = (AssemblyFilterBackend,)
     queryset = Assembly.objects.all()
     serializer_class = AssemblySerializer
-    lookup_field = 'gen_spe_num'
+    lookup_field = 'encoded_name'
 
-    def get_object(self, gen_spe_num):
+    def get_object(self, encoded_name):
         try:
-            return Assembly.objects.get(gen_spe_num=gen_spe_num)
+            return Assembly.objects.get(encoded_name=encoded_name)
         except Assembly.DoesNotExist:
             raise Http404
 
-    def get(self, request, gen_spe_num, format=None):  # @ReservedAssignment
-        assembly = self.get_object(gen_spe_num)
+    def get(self, request, encoded_name, format=None):  # @ReservedAssignment
+        assembly = self.get_object(encoded_name)
         serializer = AssemblySerializer(assembly)
         return Response(serializer.data)
 
-    def put(self, request, gen_spe_num, format=None):  # @ReservedAssignment
-        assembly = self.get_object(gen_spe_num)
+    def put(self, request, encoded_name, format=None):  # @ReservedAssignment
+        assembly = self.get_object(encoded_name)
 
         assembly_data_fields = list(request.data.keys())
 
-        non_editable_fields = ['gen_spe_num', 'gender', 'scientific_name', 'assembly_version']
-        if 'gen_spe_num' in assembly_data_fields or 'gender' in assembly_data_fields \
-                or 'scientific_name' in assembly_data_fields or 'assembly_version' in assembly_data_fields:
+        non_editable_fields = ['encoded_name', 'genus', 'scientific_name', 'assembly_version']
+        if 'encoded_name' in assembly_data_fields or 'genus' in assembly_data_fields \
+                or 'scientific_name' in assembly_data_fields or 'version' in assembly_data_fields:
             raise exceptions.ValidationError(detail="Sorry. Operation not permitted." +
                                              " You are trying to edit one of the  non-editable fields " +
                                              str(non_editable_fields))
@@ -142,8 +139,8 @@ class AssemblyDetail(mixins.RetrieveModelMixin,
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, gen_spe_num, format=None):  # @ReservedAssignment
-        assembly = self.get_object(gen_spe_num)
+    def delete(self, request, encoded_name, format=None):  # @ReservedAssignment
+        assembly = self.get_object(encoded_name)
         permission_classes = (IsAuthenticated, )  # @UnusedVariable
 
         is_authorized = self.has_object_permission(self.request, self, assembly)
