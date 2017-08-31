@@ -49,11 +49,11 @@ scientific_name_field = coreapi.Field(
             description='scientific_name to filter(eg: Homo sapiens)')
 
 version_field = coreapi.Field(
-            name='assembly_version',
+            name='version',
             location='query',
             required=False,
             type='string',
-            description='assembly_version to filter(eg: 1, 2)')
+            description='version to filter(eg: 1, 2)')
 
 taxonomy_ids_field = coreapi.Field(name='taxonomy_ids',
                                    location='query',
