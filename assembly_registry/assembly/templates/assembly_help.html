@@ -39,7 +39,7 @@
     <dl>
     <dt>The web service would provide the following:</dt>
 	 <dd>- querying of existing assemblies and providers</dd>
-	 <dd>- adding new assemblies, creating new unique identifiers based on the gender, species and assembly</dd>
+	 <dd>- adding new assemblies, creating new unique identifiers based on the genus, species and assembly</dd>
      <dd>- querying of existing species from the taxonomy database, using taxon id or species name</dd>
    </dl>
  	
@@ -210,20 +210,20 @@ Please Note: After creating a assembly, you can only UPDATE or DELETE records cr
     curl -X GET --header 'Accept: application/json' '{{hostname}}/assembly/'<br/>
     curl -X GET --header 'Accept: application/json' '{{hostname}}/assembly/?project_name=VGP'<br/>
     curl -X GET --header 'Accept: application/json' '{{hostname}}/assembly/?encoded_name=fAstCal2'<br/>
-    curl -X GET --header 'Accept: application/json' '{{hostname}}/assembly/?assembly_version=38'<br/><br/>
+    curl -X GET --header 'Accept: application/json' '{{hostname}}/assembly/?version=38'<br/><br/>
     Please note: Authentication Token not needed for GET requests.
     </div>
     </div>
     
     <div class="panel panel-success ">
     <div class="panel-heading">POST</div>
-    <div class="panel-body">curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header  'Authorization: Token fee6d25ca6dce45952f323bde6dbebb2f3bc7aff' -d '{ "taxon_id": "9601", "scientific_name": "Homo sapiens", "project_name": "HHH",  "gender": "male", "data_release":"public" }' {{hostname}}/assembly/</div>
+    <div class="panel-body">curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header  'Authorization: Token fee6d25ca6dce45952f323bde6dbebb2f3bc7aff' -d '{ "taxon_id": "9601", "scientific_name": "Homo sapiens", "project_name": "HHH",  "genus": "xxx", "data_release":"public" }' {{hostname}}/assembly/</div>
     </div>
     
     <div class="panel panel-warning ">
     <div class="panel-heading">PUT (UPDATE)</div>
     <div class="panel-body">
-    curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' --header  'Authorization: Token fee6d25ca6dce45952f323bde6dbebb2f3bc7aff' -d '{ "taxon_id": "9601", "scientific_name": "Homo sapiens", "project_name": "ddd",  "gender": "male" }' '{{hostname}}/assembly/encoded_name/mHomSap3/' 
+    curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' --header  'Authorization: Token fee6d25ca6dce45952f323bde6dbebb2f3bc7aff' -d '{ "taxon_id": "9601", "scientific_name": "Homo sapiens", "project_name": "ddd",  "genus": "xxx" }' '{{hostname}}/assembly/encoded_name/xHomSap3/' 
     </div>
     </div>
     
